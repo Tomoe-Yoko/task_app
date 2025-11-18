@@ -1,0 +1,30 @@
+name: Lint
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4.7' # 利用する Ruby のバージョンに書き換える
+          bundler-cache: true
+      - name: Run lint
+        run: bundle exec rubocop
+      - name: Notify Slack when job failed
+        if: ${{ failure() }}
+        uses: slackapi/slack-github-action@v2.0.0 #Slack webhook 入れなければスルーされるだけ
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "Rubocop lint job failed. Check the details here: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            }
+    timeout-minutes: 3
