@@ -1,0 +1,65 @@
+name: Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    services:
+      db:
+        image: postgres:18
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      RAILS_ENV: test
+      PGUSER: postgres
+      PGPASSWORD: password
+      PGHOST: 127.0.0.1
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4.7'
+          bundler-cache: true
+
+      - name: DB create
+        run: bin/rails db:create
+
+      - name: DB migrate
+        run: bin/rails db:migrate
+
+      - name: Run RSpec
+        run: bundle exec rspec
+
+    #   - name: Notify Slack when job failed
+    #     if: ${{ failure() }}
+    #     uses: slackapi/slack-github-action@v2.0.0
+    #     with:
+    #       webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+    #       webhook-type: incoming-webhook
+    #       payload: |
+    #         {
+    #           "text": "RSpec test job failed. Check details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+    #         }
+
+
