@@ -9,7 +9,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 10
+    
     services:
       db:
         image: postgres:18
@@ -50,15 +51,15 @@ jobs:
       - name: Run RSpec
         run: bundle exec rspec
 
-      - name: Notify Slack when job failed
-        if: ${{ failure() }}
-        uses: slackapi/slack-github-action@v2.0.0
-        with:
-          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
-          webhook-type: incoming-webhook
-          payload: |
-            {
-              "text": "RSpec test job failed. Check details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-            }
+    #   - name: Notify Slack when job failed
+    #     if: ${{ failure() }}
+    #     uses: slackapi/slack-github-action@v2.0.0
+    #     with:
+    #       webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+    #       webhook-type: incoming-webhook
+    #       payload: |
+    #         {
+    #           "text": "RSpec test job failed. Check details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+    #         }
 
-    timeout-minutes: 10
+
