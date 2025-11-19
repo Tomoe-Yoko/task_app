@@ -1,0 +1,8 @@
+<ul class="">
+  <% @tasks.each do |t| %>
+  <li class="block p-4 border-b border-gray-200 hover:bg-gray-100">
+  <%=  t.title %>
+  <%= t.content %>
+  </li>
+  <% end %>
+</ul>
