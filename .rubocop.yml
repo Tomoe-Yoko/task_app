@@ -5,6 +5,7 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   NewCops: enable
+  SuggestExtensions: false
 
 # コメント書くの無効化
 Style/Documentation:
