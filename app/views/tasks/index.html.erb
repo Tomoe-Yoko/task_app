@@ -1,8 +1,15 @@
+<div class="btn-primary">
+<%= link_to  "新規作成", new_task_path %>
+</div>
+
 <ul class="">
   <% @tasks.each do |t| %>
   <li class="block p-4 border-b border-gray-200 hover:bg-gray-100">
   <%=  t.title %>
   <%= t.content %>
+  <p class="p-4 bg-black text-white w-fit inline-block">
+  <%= link_to  "詳細▶︎", task_path(t) %>
+  </p>
   </li>
   <% end %>
 </ul>
