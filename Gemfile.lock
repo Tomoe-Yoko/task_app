@@ -334,6 +334,7 @@ PLATFORMS
   aarch64-linux
   aarch64-linux-gnu
   aarch64-linux-musl
+  arm-linux
   arm-linux-gnu
   arm-linux-musl
   arm64-darwin
@@ -356,13 +357,13 @@ DEPENDENCIES
   selenium-webdriver
   sprockets-rails
   stimulus-rails
-  tailwindcss-rails (= 3.3.2)
+  tailwindcss-rails (~> 3.3)
   turbo-rails
   tzinfo-data
   web-console
 
 RUBY VERSION
-   ruby 3.4.7p58
+   ruby 3.2.5p208
 
 BUNDLED WITH
-   2.6.9
+   2.7.2

@@ -5,7 +5,34 @@
 
 
 @layer utilities {
-  .btn-primary {
-    @apply bg-amber-600 text-white px-4 py-2 rounded-full w-32 text-center;
-  }
+  .header-logo {
+  @apply text-white text-2xl font-normal;
 }
+  .btn {
+  @apply bg-amber-600 text-white p-4 rounded-xl w-48 text-center;
+}
+
+ /* .header-logo {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 400!important; 
+  
+} */
+
+/* .btn {
+  background-color: rgb(217 119 6); 
+  color: #fff; 
+  padding-left: 1rem; 
+  padding-right: 1rem; 
+  padding-top: 0.5rem; 
+  padding-bottom: 0.5rem; 
+  border-radius: 9999px; 
+  width: 8rem; 
+  text-align: center; 
+}
+.details-btn:hover {
+ background-color: #ccc;
+} */
+}
+
+
