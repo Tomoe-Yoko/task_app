@@ -5,26 +5,26 @@
 <div class="bg-red-100 text-red-700 p-4 rounded mb-4">
     <strong><%= @task.errors.count %>件のエラーがあります：</strong>
     <ul class="mt-2">
-      <% @task.errors.full_messages.each do |msg| %>
+        <% @task.errors.full_messages.each do |msg| %>
         <li>・<%= msg %></li>
-      <% end %>
+        <% end %>
     </ul>
 </div>
 <% end %>
 <%= form_with(model: @task, local: true) do |f| %>
 <div class="max-w-3xl mx-auto space-y-10">
- <!-- タイトル -->
+    <!-- タイトル -->
     <div class="flex items-start space-x-6">
-    <%=f.label "タイトル" %>
-    <%= f.text_field :title, class: "w-full border border-gray-400 p-3 rounded"%>
-</div>
-  <!-- タスク内容 -->
-<div class="flex items-start space-x-6">
-    <%=f.label "タスク内容" %>
-    <%= f.text_area :content, class: "w-full border border-gray-400 p-3 rounded" %>
-</div>
- <!-- 保存ボタン -->
-<div class="p-4 bg-black text-white">
-<%= f.submit(@task.persisted? ? "更新" : "作成",class: "btn-primary") %>
-</div>
-<% end %>
+        <%=f.label "タイトル", class: "w-[15%]" %>
+        <%= f.text_field :title, class: "w-[80%] border border-gray-400 p-3 rounded"%>
+    </div>
+    <!-- タスク内容 -->
+    <div class="flex items-start space-x-6">
+        <%=f.label "タスク内容", class: "w-[15%]" %>
+        <%= f.text_area :content, class: "w-[80%] border border-gray-400 p-3 rounded" %>
+    </div>
+    <!-- 保存ボタン -->
+    <div class="text-center">
+        <%= f.submit(@task.persisted? ? "更新" : "作成",class: "btn") %>
+    </div>
+    <% end %>
