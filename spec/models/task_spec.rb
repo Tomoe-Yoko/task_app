@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Task, type: :model do
   # pending "add some examples to (or delete) #{__FILE__}"
   describe "validation" do
-
     it "タイトルは必須であること" do
       task = Task.new(title: nil, content: "内容")
       expect(task).not_to be_valid
