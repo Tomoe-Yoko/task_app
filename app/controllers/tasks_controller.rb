@@ -5,15 +5,13 @@ class TasksController < ApplicationController
     @tasks = Task.order(updated_at: :desc)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @task = Task.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @task = Task.new(task_params)
