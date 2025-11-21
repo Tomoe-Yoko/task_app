@@ -15,7 +15,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.4.7' # 利用する Ruby のバージョンに書き換える
+          ruby-version: '3.2.5' # 利用する Ruby のバージョンに書き換える
           bundler-cache: true
       - name: Run lint
         run: bundle exec rubocop
