@@ -5,3 +5,11 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   NewCops: enable
+  SuggestExtensions: false
+
+# コメント書くの無効化
+Style/Documentation:
+  Enabled: false
+# I18nの警告無効化 日本語をコントローラやビューに直書きOKにする
+Rails/I18nLocaleTexts:
+  Enabled: false

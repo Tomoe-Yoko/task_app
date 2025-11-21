@@ -1,0 +1,30 @@
+<%= link_to "一覧に戻る", tasks_path, class: "text-blue-600 underline block mb-6" %>
+
+<div class="max-w-3xl mx-auto">
+    <!-- タイトル -->
+    <h1 class="font-bold text-4xl mb-10"><%= @task.title %></h1>
+
+    <!-- セクションタイトル -->
+    <div class="flex items-center gap-2 mb-4">
+        <span>📝</span>
+        <h2 class="text-xl font-semibold">タスク内容</h2>
+    </div>
+
+    <!-- 内容ボックス -->
+    <div class="border border-gray-400 rounded-2xl p-6 bg-white text-lg leading-relaxed">
+        <%= simple_format(@task.content) %>
+    </div>
+
+    <!-- ボタンエリア -->
+    <div class="flex justify-center gap-10 mt-16">
+        <%= link_to "編集",
+        edit_task_path(@task),
+        class: "px-10 py-3 bg-sky-500 text-white rounded-xl text-lg shadow hover:bg-sky-600 transition" %>
+
+        <%= link_to "削除",
+        task_path(@task),
+        method: :delete,
+        data: {"turbo-method": :delete,turbo_confirm:"本当に削除しますか？" },
+        class: "px-10 py-3 bg-red-600 text-white rounded-xl text-lg shadow hover:bg-red-700 transition" %>
+    </div>
+</div>
