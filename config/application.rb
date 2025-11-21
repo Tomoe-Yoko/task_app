@@ -38,5 +38,11 @@ module TaskApp
     config.generators do |g|
       g.test_framework nil # TODO: RSpecを入れるまで生成されないようにしておく
     end
+
+    # その他の設定…
+    config.i18n.default_locale = :ja
+    config.i18n.available_locales = [:en, :ja]
+    # ロケール辞書の読み込みパス拡張（必要なら）
+    config.i18n.load_path += Rails.root.glob("config/locales/**/*.{*,yml}")
   end
 end
