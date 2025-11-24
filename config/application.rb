@@ -33,10 +33,17 @@ module TaskApp
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = "Tokyo" # アプリ全体の時間を 日本時間（JST）で設定
+    config.active_record.default_timezone = :local # DBに保存する時間を ローカル時間（JST）で設定
     # config.eager_load_paths << Rails.root.join("extras")
     config.generators do |g|
       g.test_framework nil # TODO: RSpecを入れるまで生成されないようにしておく
     end
+
+    # その他の設定…
+    config.i18n.default_locale = :ja
+    config.i18n.available_locales = [:en, :ja]
+    # ロケール辞書の読み込みパス拡張（必要なら）
+    config.i18n.load_path += Rails.root.glob("config/locales/**/*.{*,yml}")
   end
 end
