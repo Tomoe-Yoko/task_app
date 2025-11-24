@@ -47,6 +47,10 @@ jobs:
 
       - name: DB migrate
         run: bin/rails db:migrate
+        
+      # ★★ tailwindcss build ★★
+      - name: Build Tailwind CSS
+        run: bin/rails tailwindcss:build
 
       - name: Run RSpec
         run: bundle exec rspec
