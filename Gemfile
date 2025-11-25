@@ -36,7 +36,10 @@ gem "stimulus-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
+# # development のみで利用（production では使わない）
+group :development do
 gem "bootsnap", require: false
+end
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
