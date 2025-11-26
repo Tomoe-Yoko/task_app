@@ -1,3 +1,8 @@
+<% if turbo_frame_request? %>
+<%= turbo_frame_tag dom_id(@task) do %>
+<%= render "shared/inline_form" %>
+<% end %>
+<% else %>
 <%= link_to  "一覧に戻る", tasks_path %>
-
 <%= render "shared/task_form" %>
+<% end %>
