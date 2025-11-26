@@ -23,6 +23,11 @@
         <%=f.label :content, "タスク内容", class: "w-[15%]" %>
         <%= f.text_area :content, class: "w-[80%] border border-gray-400 p-3 rounded" %>
     </div>
+        <!-- 終了期限 -->
+    <div class="flex items-start space-x-6 w-full">
+        <%=f.label :deadline, "終了期限", class: "w-[15%]" %>
+        <%= f.date_field :deadline, class: "w-[80%] border border-gray-400 p-3 rounded"%>
+    </div>
     <!-- 保存ボタン -->
     <div class="text-center">
         <%= f.submit(@task.persisted? ? "更新" : "作成",class: "btn") %>
