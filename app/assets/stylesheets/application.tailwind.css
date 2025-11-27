@@ -2,43 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer utilities {
   .header-logo {
-  @apply text-white text-2xl font-normal;
-}
+    @apply text-white text-2xl font-normal;
+  }
   .btn {
-  @apply bg-amber-600 text-white p-4 rounded-xl w-48 text-center;
+    @apply bg-amber-600 text-white p-4 rounded-xl w-48 text-center;
+  }
+  .btn02 {
+    color: white;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.75rem;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  .btn02:hover {
+    -webkit-filter: brightness(0.8);
+    filter: brightness(0.8);
+  }
+
+  .field_with_errors input,
+  .field_with_errors textarea,
+  .field_with_errors select {
+    @apply w-full;
+  }
 }
-
-.field_with_errors input,
-.field_with_errors textarea,
-.field_with_errors select {
-  @apply w-full;
-}
-
- /* .header-logo {
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: 400!important; 
-  
-} */
-
-/* .btn {
-  background-color: rgb(217 119 6); 
-  color: #fff; 
-  padding-left: 1rem; 
-  padding-right: 1rem; 
-  padding-top: 0.5rem; 
-  padding-bottom: 0.5rem; 
-  border-radius: 9999px; 
-  width: 8rem; 
-  text-align: center; 
-}
-.details-btn:hover {
- background-color: #ccc;
-} */
-}
-
-
