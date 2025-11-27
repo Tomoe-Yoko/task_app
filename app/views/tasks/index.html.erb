@@ -1,7 +1,31 @@
-<div class="flex justify-end mb-6">
-    <%= link_to  "新規作成", new_task_path, class: "btn" %>
-</div>
+<div class="flex justify-end items-start gap-4">
+    <div class="h-10 border border-gray-300 rounded px-2 py-1 ">
+        <%= select_tag :order,
+    options_for_select(
+      [
+        ["終了期限順", tasks_path(latest: true)],
+        ["更新順",     tasks_path(updated: true)],
+        ["作成順",     tasks_path(created: true)]
+      ],
+      # 現在のパラメータから選択中を表示
+      selected: if params[:latest]
+                  tasks_path(latest: true)#パスヘルパー＋キーバリューで指定
+                elsif params[:updated]
+                  tasks_path(updated: true)
+                elsif params[:created]
+                  tasks_path(created: true)
+                else
+                  tasks_path(updated: true)
+                end
+    ),
+    onchange: "if (this.value) window.location.href = this.value;"%>
+    </div>
 
+
+    <div class="flex justify-end mb-6">
+        <%= link_to  "新規作成", new_task_path, class: "btn" %>
+    </div>
+</div>
 <ul>
     <li class="grid grid-cols-5 items-center mt-5 p-4 border-b bg-gray-300">
         <p>タスク名</p>
@@ -10,7 +34,7 @@
         <p>詳細</p>
         <p>編集</p>
     </li>
-    <% @tasks.each do |t| %> 
+    <% @tasks.each do |t| %>
     <%= turbo_frame_tag dom_id(t) do %>
     <li class="grid grid-cols-5 w-full items-center p-4 border-b border-gray-200 hover:bg-gray-100">
 

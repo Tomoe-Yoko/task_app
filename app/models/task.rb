@@ -10,4 +10,8 @@ class Task < ApplicationRecord
 
     errors.add(:deadline, "締め切り日は今日以降の日付にしてください")
   end
+
+  scope :latest, -> { order(deadline: :asc) }
+  scope :updated, -> { order(updated_at: :desc) }
+  scope :created, -> { order(created_at: :desc) }
 end
