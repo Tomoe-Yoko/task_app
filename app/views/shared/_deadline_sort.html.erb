@@ -1,21 +1,13 @@
- <div class="h-10 border border-gray-300 rounded px-2 py-1 ">
-        <%= select_tag :order,
+<div class="h-10 border border-gray-300 rounded px-2 py-1">
+  <%= select_tag :order,
     options_for_select(
       [
-        ["更新順",     tasks_path(updated: true)],
-        ["終了期限順", tasks_path(latest: true)],
-        ["作成順",     tasks_path(created: true)]
+        ["更新順",     "updated"],
+        ["終了期限順", "latest"],
+        ["作成順",     "created"]
       ],
-      # 現在のパラメータから選択中を表示
-      selected: if params[:updated]
-                  tasks_path(updated: true)#パスヘルパー＋キーバリューで指定
-                elsif params[:latest]
-                  tasks_path(latest: true)
-                elsif params[:created]
-                  tasks_path(created: true)
-                else
-                  tasks_path(updated: true)
-                end
+      selected: request.params[:order]
     ),
-    onchange: "if (this.value) window.location.href = this.value;"%>
-    </div>
+onchange: "window.location.href = '/tasks?order=' + this.value;"  %>
+</div>
+
