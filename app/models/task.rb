@@ -8,10 +8,12 @@ class Task < ApplicationRecord
     return if deadline.blank?
     return if deadline >= Time.zone.today
 
-    errors.add(:deadline, "締め切り日は今日以降の日付にしてください")
+    errors.add(:deadline, "は今日以降の日付にしてください")
   end
 
   scope :updated, -> { order(updated_at: :desc) }
   scope :latest, -> { order(deadline: :asc) }
   scope :created, -> { order(created_at: :desc) }
+
+  enum :status, { not_started: 0, doing: 1, done: 2 }
 end
