@@ -6,6 +6,7 @@ RSpec.describe "Tasks", type: :system do
       click_on "新規作成"
       fill_in "タイトル", with: "新しいタスク"
       fill_in "タスク内容", with: "タスクの内容"
+      fill_in "終了期限", with: Date.tomorrow
       click_on "作成"
       expect(page).to have_current_path tasks_path
       expect(page).to have_content "タスクが作成されました"
