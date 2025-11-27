@@ -4,10 +4,10 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.order(updated_at: :desc)
 
-    if params[:latest]
-      @tasks = Task.latest
-    elsif params[:updated]
+    if params[:updated]
       @tasks = Task.updated
+    elsif params[:latest]
+      @tasks = Task.latest
     elsif params[:created]
       @tasks = Task.created
     end
