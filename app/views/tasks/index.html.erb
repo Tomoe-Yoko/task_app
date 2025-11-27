@@ -1,26 +1,44 @@
-<div class="flex justify-end mb-6">
-    <%= link_to  "新規作成", new_task_path, class: "btn" %>
-</div>
+<div class="flex justify-end items-start gap-4">
+   <%=render "shared/deadline_sort"%>
 
-<ul >
-    <li class="grid grid-cols-3 items-center mt-5 p-4 border-b bg-gray-300">
+    <div class="flex justify-end mb-6">
+        <%= link_to  "新規作成", new_task_path, class: "btn" %>
+    </div>
+</div>
+<ul>
+    <li class="grid grid-cols-5 items-center mt-5 p-4 border-b bg-gray-300">
         <p>タスク名</p>
         <p>タスク内容</p>
+        <p>終了期限</p>
+        <div class="flex justify-center items-center gap-4">
         <p>詳細</p>
+        <p>編集</p>
+          </div>
     </li>
     <% @tasks.each do |t| %>
-    <%= link_to task_path(t), class: "block" do %>
-    <li class="grid grid-cols-3 items-center p-4 border-b border-gray-200 hover:bg-gray-100">
-        <p class=" w-fittext-lg font-medium">
+    <%= turbo_frame_tag dom_id(t) do %>
+    <li class="grid grid-cols-5 w-full items-center p-4 border-b border-gray-200 hover:bg-gray-100">
+
+        <p class=" w-fit text-lg font-medium">
             <%= t.title %>
         </p>
         <p class="w-fit">
             <%= truncate(t.content, length: 11) %>
         </p>
-        <p class="p-4 details-btn w-fit block">
-            詳細▶︎
+        <p class="w-fit">
+            <%= t.deadline.strftime("%Y年%m月%d日") if t.deadline.present? %>
         </p>
+        <div class="flex justify-center items-center gap-4">
+        <p >
+            <%= link_to  "詳細▶︎", task_path(t),data: { turbo: false }, class: "btn02 bg-blue-500"%>
+        </p>
+        <p class="w-fit">
+            <%= link_to "編集", edit_task_path(t),data: { turbo_frame: dom_id(t) },
+        class: "btn02 bg-sky-500 " %>
+        </p>
+        </div>
     </li>
     <% end %>
     <% end %>
+
 </ul>

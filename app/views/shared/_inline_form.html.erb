@@ -1,0 +1,19 @@
+<%# Turbo Frame 用 %>
+<%= form_with model: @task,
+              data: { turbo_frame: dom_id(@task) } do |f| %>
+
+<div class="grid grid-cols-5 gap-4 items-center">
+    <%= f.text_field :title, class: "border border-gray-300 rounded px-2 py-1" %>
+    <%= f.text_field :content, class: "border border-gray-300 rounded px-2 py-1" %>
+    <%= f.date_field :deadline, class: "border border-gray-300 rounded px-2 py-1" %>
+    <div class="flex justify-center items-center gap-4 col-span-2">
+        <p class="w-fit">
+            <%= link_to "キャンセル", tasks_path,
+          data: { turbo_frame: dom_id(@task) }, class: "btn02  bg-gray-500 "%>
+        </p>
+        <p class="w-fit">
+            <%= f.submit "更新" , class: "btn02 bg-amber-600 "%>
+        </p>
+    </div>
+</div>
+<% end %>

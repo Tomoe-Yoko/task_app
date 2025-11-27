@@ -2,7 +2,13 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
-    @tasks = Task.order(updated_at: :desc)
+    @order = params[:order]
+    @tasks =
+      case @order
+      when "latest" then Task.latest
+      when "created" then Task.created
+      else Task.updated
+      end
   end
 
   def show; end
@@ -45,6 +51,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content)
+    params.require(:task).permit(:title, :content, :deadline)
   end
 end
