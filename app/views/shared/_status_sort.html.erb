@@ -1,0 +1,11 @@
+<div class="h-10 border border-gray-300 rounded px-2 py-1">
+    <%= select_tag :status, 
+    options_for_select(
+     [ 
+      ["未着手", "not_started"],
+      ["着手中", "doing"], 
+      ["完了", "done"], 
+  ], 
+  selected: request.params[:status] ),
+  onchange: "window.location.href = '/tasks?status=' + this.value;" %>
+</div>
