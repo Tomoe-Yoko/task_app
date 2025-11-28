@@ -3,12 +3,19 @@ class TasksController < ApplicationController
 
   def index
     @order = params[:order]
+    # 期限ソート
     @tasks =
       case @order
       when "latest" then Task.latest
       when "created" then Task.created
       else Task.updated
       end
+
+    # ステータス絞り込み
+    @status = params[:status]
+    return unless %w[not_started doing done].include?(@status)
+
+    @tasks = @tasks.where(status: @status)
   end
 
   def show; end
