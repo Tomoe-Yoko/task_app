@@ -6,6 +6,7 @@
     <%= f.text_field :title, class: "border border-gray-300 rounded px-2 py-1" %>
     <%= f.text_field :content, class: "border border-gray-300 rounded px-2 py-1" %>
     <%= f.date_field :deadline, class: "border border-gray-300 rounded px-2 py-1" %>
+    <%= f.select :status, Task.statuses.keys.map { |status| [I18n.t("activerecord.attributes.task/status.#{status}"), status] }, {}, class: "border border-gray-300 rounded px-2 py-1" %>
     <div class="flex justify-center items-center gap-4 col-span-2">
         <p class="w-fit">
             <%= link_to "キャンセル", tasks_path,

@@ -13,9 +13,9 @@ class TasksController < ApplicationController
 
     # ステータス絞り込み
     @status = params[:status]
-    return unless %w[not_started doing done].include?(@status)
+    return unless %w[not_started doing done].include?(@status) || @status.blank?
 
-    @tasks = @tasks.where(status: @status)
+    @tasks = @tasks.where(status: @status) if @status.present?
   end
 
   def show; end
@@ -58,6 +58,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :deadline)
+    params.require(:task).permit(:title, :content, :deadline, :status)
   end
 end
