@@ -1,0 +1,23 @@
+<%= form_with url: tasks_path, method: :get, local: true do |f| %>
+<div class="flex gap-2">
+
+    <%= f.text_field :title, value: params[:title], placeholder: "タスク名で検索", class: "border border-gray-300 rounded px-2 py-1" %>
+    <%=f.select :status,
+    [ 
+      ["すべて", ""],
+      ["未着手", "not_started"],
+      ["着手中", "doing"], 
+      ["完了", "done"], 
+  ], selected: request.params[:status], class: "h-10 border border-gray-300 rounded px-2 py-1"  %>
+
+    <%=f.select :order,
+        [
+          ["更新順",     "updated"],
+          ["終了期限順", "latest"],
+          ["作成順",     "created"],
+        ],
+        selected: request.params[:order], class: "h-10 border border-gray-300 rounded px-2 py-1"%>
+    <%= f.submit "検索", class: "bg-amber-500 btn02" %>
+</div>
+
+<% end %>

@@ -2,20 +2,25 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
-    @order = params[:order]
-    # 期限ソート
-    @tasks =
-      case @order
-      when "latest" then Task.latest
-      when "created" then Task.created
-      else Task.updated
-      end
+    @tasks = Task.all # 初期化
+    # タイトルで絞り込み
+    @title = params[:title]
+    @tasks = @tasks.where("title like '%#{@title}%'") if @title.present?
 
-    # ステータス絞り込み
+    # ステータスで絞り込み
     @status = params[:status]
-    return unless %w[not_started doing done].include?(@status) || @status.blank?
-
-    @tasks = @tasks.where(status: @status) if @status.present?
+    @tasks = @tasks.where(status: @status) if %w[not_started doing done].include?(@status)
+    # ソート機能
+    @order = params[:order]
+    @tasks = case @order
+             when "latest"
+               @tasks.order(deadline: :asc)
+             when "created"
+               @tasks.order(created_at: :asc)
+             else
+               @tasks.order(updated_at: :desc)
+             end
+    render "tasks/index"
   end
 
   def show; end
