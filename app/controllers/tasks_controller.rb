@@ -9,16 +9,16 @@ class TasksController < ApplicationController
 
     # ステータスで絞り込み
     @status = params[:status]
-    @tasks = @tasks.where(status: @status) if %w[not_started doing done].include?(@status)
+    @tasks = @tasks.where(status: @status) if @status.present?
     # ソート機能
     @order = params[:order]
     @tasks = case @order
              when "latest"
-               @tasks.order(deadline: :asc)
+               @tasks.latest
              when "created"
-               @tasks.order(created_at: :asc)
+               @tasks.created
              else
-               @tasks.order(updated_at: :desc)
+               @tasks.updated
              end
     render "tasks/index"
   end
