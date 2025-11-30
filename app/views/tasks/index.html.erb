@@ -1,8 +1,10 @@
-<div class="flex justify-end items-start gap-4">
+<div class="flex justify-end items-center gap-4">
+
+    <%= render "shared/search" %>
     <%=render "shared/deadline_sort"%>
     <%=render "shared/status_sort"%>
 
-    <div class="flex justify-end mb-6">
+    <div class="flex justify-end">
         <%= link_to  "新規作成", new_task_path, class: "btn" %>
     </div>
 </div>
@@ -31,7 +33,7 @@
             <%= t.deadline.strftime("%Y年%m月%d日") if t.deadline.present? %>
         </p>
         <p class="w-fit">
-        <%= I18n.t("activerecord.attributes.task/status.#{t.status}") %> </p>
+            <%= I18n.t("activerecord.attributes.task/status.#{t.status}") %> </p>
         <div class="flex justify-center items-center gap-4">
             <p>
                 <%= link_to  "詳細▶︎", task_path(t),data: { turbo: false }, class: "btn02 bg-blue-500"%>
