@@ -2,25 +2,8 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
-    @tasks = Task.all # 初期化
-    # タイトルで絞り込み
-    @title = params[:title]
-    @tasks = @tasks.where("title like '%#{@title}%'") if @title.present?
-
-    # ステータスで絞り込み
-    @status = params[:status]
-    @tasks = @tasks.where(status: @status) if @status.present?
-    # ソート機能
-    @order = params[:order]
-    @tasks = case @order
-             when "latest"
-               @tasks.latest
-             when "created"
-               @tasks.created
-             else
-               @tasks.updated
-             end
-    render "tasks/index"
+    @search_form = TaskSearchForm.new(search_params)
+    @tasks = @search_form.search
   end
 
   def show; end
@@ -64,5 +47,11 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:title, :content, :deadline, :status)
+  end
+
+  # FormObject で使う値だけを許可params
+  def search_params
+    params.fetch(:task_search_form, {}).permit(:title, :status, :order)
+    #  requireではなくfetch　ask_search_form があればその中身（ハッシュ）を返すなければ {}（空ハッシュ）を返す → エラーにならない！
   end
 end
