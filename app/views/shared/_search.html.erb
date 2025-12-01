@@ -6,6 +6,8 @@
     placeholder: "タスク名で検索", 
     class: "border border-gray-300 rounded px-2 py-1" %>
     <!-- ステータス検索 -->
+  <div class="flex flex-col">
+    <%=f.label :status, "ステータス" %>
     <%= f.select :status,
       [
         ["すべて", ""],
@@ -15,7 +17,24 @@
       ],
       { selected: @search_form.status },
       class: "h-10 border border-gray-300 rounded px-2 py-1" %>
-    <!-- ソート -->
+     </div>
+     
+    <!-- 優先度検索 -->
+     <div class="flex flex-col">
+     <%=f.label :priority, "優先度" %>
+     <%= f.select :priority,
+      [
+        ["すべて", ""],
+        ["低", "low"],
+        ["中", "medium"],
+        ["高", "high"]
+      ],
+      { selected: @search_form.priority },
+      class: "h-10 border border-gray-300 rounded px-2 py-1" %>
+    </div>
+    <!-- ソート --> 
+    <div class="flex flex-col">
+    <%=f.label :order, "並び順" %>
     <%= f.select :order,
       [
         ["更新順",     "updated"],
@@ -24,6 +43,7 @@
       ],
       { selected: @search_form.order },
       class: "h-10 border border-gray-300 rounded px-2 py-1" %>
-    <%= f.submit "検索", class: "bg-amber-500 btn02" %>
+    </div>
+    <%= f.submit "検索", class: "bg-amber-500 btn02 leading-8" %>
 </div>
 <% end %>

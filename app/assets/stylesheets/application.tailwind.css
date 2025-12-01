@@ -11,7 +11,7 @@
   }
   .btn02 {
     color: white;
-    padding: 1rem;
+    padding: 0.8rem 1rem;
     border-radius: 0.75rem;
     font-size: 1rem;
     line-height: 1.75rem;
@@ -21,6 +21,10 @@
   .btn02:hover {
     -webkit-filter: brightness(0.8);
     filter: brightness(0.8);
+  }
+
+  .inline_input {
+    @apply border border-gray-300 rounded px-2 py-1;
   }
 
   .field_with_errors input,

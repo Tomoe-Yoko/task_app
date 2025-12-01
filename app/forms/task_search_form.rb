@@ -5,6 +5,7 @@ class TaskSearchForm
   # Rails の params はすべて文字列で来る
   attribute :title, :string
   attribute :status, :string
+  attribute :priority, :string
   attribute :order, :string
 
   # 検索処理の本体
@@ -12,6 +13,7 @@ class TaskSearchForm
     tasks = Task.all
     tasks = filter_title(tasks)
     tasks = filter_status(tasks)
+    tasks = filter_priority(tasks)
     sort_order(tasks)
   end
 
@@ -25,6 +27,11 @@ class TaskSearchForm
   # ▼ ステータス検索
   def filter_status(tasks)
     status.present? && Task.statuses.keys.include?(status) ? tasks.where(status: status) : tasks
+  end
+
+  # ▼ 優先度検索
+  def filter_priority(tasks)
+    priority.present? && Task.priorities.keys.include?(priority) ? tasks.where(priority: priority) : tasks
   end
 
   # ▼ ソート

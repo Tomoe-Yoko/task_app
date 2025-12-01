@@ -46,12 +46,12 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :deadline, :status)
+    params.require(:task).permit(:title, :content, :deadline, :status, :priority)
   end
 
   # FormObject で使う値だけを許可params
   def search_params
-    params.fetch(:task_search_form, {}).permit(:title, :status, :order)
+    params.fetch(:task_search_form, {}).permit(:title, :status, :order, :priority)
     #  requireではなくfetch　ask_search_form があればその中身（ハッシュ）を返す。なければ {}（空ハッシュ）を返す → エラーにならない！
   end
 end

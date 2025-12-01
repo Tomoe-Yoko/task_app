@@ -19,5 +19,10 @@ class Task < ApplicationRecord
   scope :not_started, -> { where(status: :not_started) }
   scope :doing, -> { where(status: :doing) }
   scope :done, -> { where(status: :done) }
+  # 優先度機能
+  enum :priority, { low: 0, medium: 1, high: 2 }
+  scope :low, -> { where(priority: :low) }
+  scope :medium, -> { where(priority: :medium) }
+  scope :high, -> { where(priority: :high) }
   # Ex:- scope :active, -> {where(:active => true)}
 end

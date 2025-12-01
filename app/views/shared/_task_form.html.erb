@@ -23,15 +23,21 @@
         <%=f.label :content, "タスク内容", class: "w-[15%]" %>
         <%= f.text_area :content, class: "w-[80%] border border-gray-400 p-3 rounded" %>
     </div>
-        <!-- 終了期限 -->
+    <!-- 終了期限 -->
     <div class="flex items-start space-x-6 w-full">
         <%=f.label :deadline, "終了期限", class: "w-[15%]" %>
         <%= f.date_field :deadline, class: "w-[80%] border border-gray-400 p-3 rounded"%>
     </div>
-        <!-- ステータス -->
+    <!-- ステータス -->
     <div class="flex items-start space-x-6 w-full">
         <%=f.label :status, "ステータス", class: "w-[15%]" %>
         <%= f.select :status, Task.statuses.keys.map { |status| [I18n.t("activerecord.attributes.task/status.#{status}"), status] }, class: "w-[80%] border border-gray-400 p-3 rounded" %>
+    </div>
+    <!-- 優先度 -->
+    <div class="flex items-start space-x-6 w-full">
+        <%=f.label :priority, "優先度", class: "w-[15%]" %>
+        <%= f.select :priority, Task.priorities.keys.map { |priority| [I18n.t("activerecord.attributes.task/priority.#{priority}"), priority] }, 
+        class: "w-[80%] border border-gray-400 p-3 rounded" %>
     </div>
     <!-- 保存ボタン -->
     <div class="text-center">
