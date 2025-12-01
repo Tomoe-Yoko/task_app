@@ -2,6 +2,7 @@ class TaskSearchForm
   include ActiveModel::Model
   include ActiveModel::Attributes # 型を持つattributes(カラム的なもの)をかんたんに定義
 
+  # Rails の params はすべて文字列で来る
   attribute :title, :string
   attribute :status, :string
   attribute :order, :string
@@ -9,19 +10,32 @@ class TaskSearchForm
   # 検索処理の本体
   def search
     tasks = Task.all
+    tasks = filter_title(tasks)
+    tasks = filter_status(tasks)
+    sort_order(tasks)
+  end
 
-    # ▼ タイトル検索
-    tasks = tasks.where("title LIKE '%#{title}%'") if title.present?
+  private
 
-    # ▼ ステータス検索
-    tasks = tasks.where(status: status) if status.present? && Task.statuses.keys.include?(status)
+  # ▼ タイトル検索
+  def filter_title(tasks)
+    title.present? ? tasks.where("title LIKE '%#{title}%'") : tasks
+  end
 
-    # ▼ ソート
+  # ▼ ステータス検索
+  def filter_status(tasks)
+    status.present? && Task.statuses.keys.include?(status) ? tasks.where(status: status) : tasks
+  end
+
+  # ▼ ソート
+  def sort_order(tasks)
     case order
-    when "latest"  then tasks.latest
-    when "created" then tasks.created
-    else tasks.updated
+    when "latest"
+      tasks.latest
+    when "created"
+      tasks.created
+    else
+      tasks.updated
     end
-    tasks
   end
 end
