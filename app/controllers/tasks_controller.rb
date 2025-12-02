@@ -1,9 +1,10 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
-
+ 
   def index
     @search_form = TaskSearchForm.new(search_params)
     @tasks = @search_form.search
+    @pagy, @tasks = pagy(@tasks, limit: 5)
   end
 
   def show; end
