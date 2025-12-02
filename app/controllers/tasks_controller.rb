@@ -2,13 +2,9 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
-    @order = params[:order]
-    @tasks =
-      case @order
-      when "latest" then Task.latest
-      when "created" then Task.created
-      else Task.updated
-      end
+    @search_form = TaskSearchForm.new(search_params)
+    @tasks = @search_form.search
+    @pagy, @tasks = pagy(@tasks, limit: 5)
   end
 
   def show; end
@@ -51,6 +47,12 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :deadline)
+    params.require(:task).permit(:title, :content, :deadline, :status, :priority)
+  end
+
+  # FormObject で使う値だけを許可params
+  def search_params
+    params.fetch(:task_search_form, {}).permit(:title, :status, :order, :priority)
+    #  requireではなくfetch　ask_search_form があればその中身（ハッシュ）を返す。なければ {}（空ハッシュ）を返す → エラーにならない！
   end
 end

@@ -2,25 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
+@layer components {
   .header-logo {
     @apply text-white text-2xl font-normal;
   }
+
   .btn {
     @apply bg-amber-600 text-white p-4 rounded-xl w-48 text-center;
   }
+
   .btn02 {
-    color: white;
-    padding: 1rem;
-    border-radius: 0.75rem;
-    font-size: 1rem;
-    line-height: 1.75rem;
-    text-align: center;
-    letter-spacing: 1px;
+    @apply text-white px-4 py-3 rounded-xl text-base leading-7 tracking-wide;
   }
+
   .btn02:hover {
-    -webkit-filter: brightness(0.8);
-    filter: brightness(0.8);
+    @apply brightness-90;
+  }
+
+  .inline_input {
+    @apply border border-gray-300 rounded px-2 py-1;
+  }
+  .series-nav {
+    display: flex;
+    gap: 8px;
+    justify-content: start;
+    margin: 1rem 0;
+  }
+  .series-nav > a {
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    background: #eee;
+    color: #333;
+  }
+  .series-nav > a[aria-current="page"] {
+    background: #d97706;
+    color: #fff !important;
   }
 
   .field_with_errors input,
@@ -29,3 +45,14 @@
     @apply w-full;
   }
 }
+/* @layer components {
+  .series-nav {
+    @apply flex gap-2 justify-start my-4;
+  }
+  .series-nav a {
+    @apply px-4 py-2 rounded bg-gray-200 text-gray-700;
+  }
+  .series-nav a[aria-current="page"] {
+    @apply bg-orange-400 text-white;
+  }
+} */
