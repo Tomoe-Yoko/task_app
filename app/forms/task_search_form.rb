@@ -21,7 +21,7 @@ class TaskSearchForm
 
   # ▼ タイトル検索
   def filter_title(tasks)
-    title.present? ? tasks.where("title LIKE '%#{title}%'") : tasks
+    title.present? ? tasks.where("title LIKE ?", "%#{title}%") : tasks
   end
 
   # ▼ ステータス検索
