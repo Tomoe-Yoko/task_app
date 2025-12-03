@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  root 'tasks#index'
+  devise_for :users
+  root 'tasks#index' # ログイン後の遷移先
   resources :tasks
-  get "search" => "searches#search" # 検索ボタンが押された時
+  # get "search" => "searches#search" # 検索ボタンが押された時
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
