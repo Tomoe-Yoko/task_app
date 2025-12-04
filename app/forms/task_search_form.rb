@@ -2,6 +2,8 @@ class TaskSearchForm
   include ActiveModel::Model
   include ActiveModel::Attributes # 型を持つattributes(カラム的なもの)をかんたんに定義
 
+  attr_accessor :user
+
   # Rails の params はすべて文字列で来る
   attribute :title, :string
   attribute :status, :string
@@ -10,7 +12,7 @@ class TaskSearchForm
 
   # 検索処理の本体
   def search
-    tasks = Task.all
+    tasks = user.tasks
     tasks = filter_title(tasks)
     tasks = filter_status(tasks)
     tasks = filter_priority(tasks)

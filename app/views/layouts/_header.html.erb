@@ -1,4 +1,7 @@
-<header class="w-full h-20 bg-black fixed top-0 left-0 flex items-center px-5 shadow-md z-10">
+<header class="w-full h-20 bg-black fixed top-0 left-0 flex items-center justify-between px-5 shadow-md z-10">
     <%= link_to "タスク一覧", root_path, id:"logo", class:"header-logo"%>
-
+    <% if user_signed_in? %>
+    <%= link_to "ログイン", new_user_session_path, class: "ml-auto text-white hover:underline" unless user_signed_in? %>
+    <%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "ml-auto text-white hover:underline" if user_signed_in? %>
+    <% end %>
 </header>
