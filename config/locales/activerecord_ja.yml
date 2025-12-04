@@ -8,6 +8,7 @@ ja:
         content: タスク内容
         deadline: 終了期限
         status: ステータス
+        priority: 優先度
       task/status:
         not_started: 未着手
         doing: 着手中
@@ -16,3 +17,14 @@ ja:
         low: 低
         medium: 中
         high: 高
+# deviseの日本語化設定
+  devise:
+    registrations:
+      signed_up: "アカウント登録が完了しました"       
+    sessions: 
+          user:
+          signed_in: "ログインしました。"
+          signed_out: "ログアウトしました。"
+    failure:
+          user:
+          already_authenticated: "既にログインしています。"
