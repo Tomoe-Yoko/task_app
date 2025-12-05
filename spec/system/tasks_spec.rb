@@ -1,5 +1,15 @@
 require 'rails_helper'
 RSpec.describe "Tasks", type: :system do
+  include Warden::Test::Helpers
+
+  Warden.test_mode!
+
+  let(:user) { User.create!(name: "Tom", email: "test@example.com", password: "password") }
+
+  before do
+    login_as(user, scope: :user)
+  end
+
   describe "タスクを新規作成できる" do
     it "一覧に表示される" do
       visit tasks_path
