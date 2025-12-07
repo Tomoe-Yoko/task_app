@@ -5,6 +5,12 @@ module Admin
       @users = User.includes(:tasks) # N+1問題対策
     end
 
+    def show
+      @user = User.includes(:tasks).find(params[:id])
+      @tasks = @user.tasks
+      @pagy, @tasks = pagy(@tasks, limit: 5)
+    end
+
     def new
       @user = User.new
     end

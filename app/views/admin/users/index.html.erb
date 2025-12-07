@@ -9,11 +9,7 @@
             <span class="col-span-2 text-left">メールアドレス</span>
             <span class="text-center">タスク件数</span>
             <div class="flex justify-center items-center gap-10">
-                <%
-=begin%>
                 <span class="text-center">詳細</span>
-                <%
-=end%>
                 <span class="text-center">更新</span>
                 <span class="text-center">削除</span>
             </div>
@@ -24,13 +20,11 @@
             <span class="col-span-2 text-left"><%= user.email %></span>
             <span class="text-center"><%= "#{user.tasks.size}件" %></span>
             <div class="flex justify-center items-center gap-4">
-                <%
-=begin%>
+
                 <span class="text-center">
-                    <%= link_to "詳細", admin_user_path(user), class: "btn02 bg-green-600 hover:bg-green-700 transition" %>
+                    <%= link_to "詳細", admin_user_path(user), class: "btn02 bg-blue-500 hover:bg-blue-600 transition" %>
                 </span>
-                <%
-=end%>
+ 
                 <span class="text-center">
                     <%= link_to "更新", edit_admin_user_path(user), class: "btn02 bg-sky-500 hover:bg-sky-600 transition" %>
                 </span>

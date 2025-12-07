@@ -1,0 +1,38 @@
+<%=link_to "←ユーザー一覧に戻る", admin_users_path, class: "block mb-12 hover:text-blue-500 transition" %>
+<%== @pagy.series_nav class: "my-4 color-red-500" %>
+<ul>
+    <li class="grid grid-cols-5 items-center mt-5 p-4 border-b bg-gray-300">
+        <p>タスク名</p>
+        <p>タスク内容</p>
+        <p>終了期限</p>
+        <p>ステータス</p>
+        <p>優先度</p>
+
+    </li>
+    <% @user.tasks.each do |t| %>
+    <%= turbo_frame_tag dom_id(t) do %>
+    <li class="grid grid-cols-5 w-full items-center p-4 border-b border-gray-200 hover:bg-gray-100">
+
+        <p class=" w-fit text-lg font-medium">
+            <%= t.title %>
+        </p>
+        <p class="w-fit">
+            <%= truncate(t.content, length: 11) %>
+        </p>
+        <p class="w-fit">
+            <%= t.deadline.strftime("%Y年%m月%d日") if t.deadline.present? %>
+        </p>
+        <p class="w-fit">
+            <%= I18n.t("activerecord.attributes.task/status.#{t.status}") %>
+        </p>
+        <p class="w-fit">
+            <%= I18n.t("activerecord.attributes.task/priority.#{t.priority}") %>
+        </p>
+
+    </li>
+    <% end %>
+    <% end %>
+
+
+</ul>
+<%== @pagy.info_tag %>
