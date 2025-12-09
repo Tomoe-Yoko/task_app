@@ -8,6 +8,7 @@ ja:
         content: タスク内容
         deadline: 終了期限
         status: ステータス
+        priority: 優先度
       task/status:
         not_started: 未着手
         doing: 着手中
@@ -16,3 +17,20 @@ ja:
         low: 低
         medium: 中
         high: 高
+# deviseの日本語化設定
+  devise:
+    registrations:
+      signed_up: "アカウント登録が完了しました"       
+    sessions: 
+          user:
+          signed_in: "ログインしました。"
+          signed_out: "ログアウトしました。"
+    failure:
+          user:
+          already_authenticated: "既にログインしています。"
+    passwords:
+      no_token: "このページにはパスワードリセットのメールからアクセスしてください。もしパスワードリセットのメールからアクセスしている場合は、提供された完全なURLを使用していることを確認してください。"
+      send_instructions: "数分以内にパスワードリセットの手順が記載されたメールが届きます。"
+      send_paranoid_instructions: "もしあなたのメールアドレスがデータベースに存在する場合、数分以内にパスワード回復リンクがあなたのメールアドレスに送信されます。"
+      updated: "パスワードが正常に変更されました。現在サインインしています。"
+      updated_not_active: "パスワードが正常に変更されました。" 

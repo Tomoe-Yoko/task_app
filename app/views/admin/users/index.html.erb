@@ -1,0 +1,39 @@
+
+<div class="flex justify-between items-center gap-4 my-8">
+    <h2 class="text-2xl font-bold mb-6">管理者画面：ユーザー一覧</h2>
+    <%= link_to  "ユーザー新規作成", new_admin_user_path, class: "btn" %>
+</div>
+<div class="overflow-x-auto">
+    <ul class="min-w-full bg-white border border-gray-200 rounded-xl divide-y divide-gray-200">
+        <li class="grid grid-cols-5 bg-gray-100 text-gray-700 font-semibold py-3 px-4">
+            <span class="text-left">名前</span>
+            <span class="col-span-2 text-left">メールアドレス</span>
+            <span class="text-center">タスク件数</span>
+            <div class="flex justify-center items-center gap-10">
+                <span class="text-center">詳細</span>
+                <span class="text-center">更新</span>
+                <span class="text-center">削除</span>
+            </div>
+        </li>
+        <% @users.each do |user| %>
+        <li class="grid grid-cols-5 items-center py-3 px-4 hover:bg-gray-50">
+            <span class="text-left"><%= user.name %></span>
+            <span class="col-span-2 text-left"><%= user.email %></span>
+            <span class="text-center"><%= "#{user.tasks.size}件" %></span>
+            <div class="flex justify-center items-center gap-4">
+
+                <span class="text-center">
+                    <%= link_to "詳細", admin_user_path(user), class: "btn02 bg-blue-500 hover:bg-blue-600 transition" %>
+                </span>
+ 
+                <span class="text-center">
+                    <%= link_to "更新", edit_admin_user_path(user), class: "btn02 bg-sky-500 hover:bg-sky-600 transition" %>
+                </span>
+                <span class="text-center">
+                    <%= link_to "削除", admin_user_path(user), data: {"turbo-method": :delete, turbo_confirm: "本当に削除しますか？" }, class: "btn02 bg-red-500 hover:bg-red-600 transition" %>
+                </span>
+            </div>
+        </li>
+        <% end %>
+    </ul>
+</div>

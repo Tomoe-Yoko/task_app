@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
-    @search_form = TaskSearchForm.new(search_params)
+    @search_form = TaskSearchForm.new(search_params.merge(user: current_user))
     @tasks = @search_form.search
     @pagy, @tasks = pagy(@tasks, limit: 5)
   end
@@ -17,6 +17,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    @task.user = current_user
     if @task.save
       flash[:notice] = "タスクが作成されました"
       redirect_to tasks_path, status: :see_other
