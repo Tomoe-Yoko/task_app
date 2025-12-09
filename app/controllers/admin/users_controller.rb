@@ -6,7 +6,7 @@ module Admin
     end
 
     def show
-      @user = User.includes(:tasks).find(params[:id])
+      @user = User.find(params[:id])
       @tasks = @user.tasks
       @pagy, @tasks = pagy(@tasks, limit: 5)
     end

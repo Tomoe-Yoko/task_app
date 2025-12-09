@@ -10,7 +10,7 @@
         <p>優先度</p>
 
     </li>
-    <% @user.tasks.each do |t| %>
+    <% @tasks.each do |t| %>
     <%= turbo_frame_tag dom_id(t) do %>
     <li class="grid grid-cols-5 w-full items-center p-4 border-b border-gray-200 hover:bg-gray-100">
 
