@@ -1,5 +1,5 @@
 module Admin
-  class UsersController < ApplicationController
+  class UsersController < BaseController
     before_action :set_user, only: %i[edit update destroy]
     def index
       @users = User.includes(:tasks) # N+1問題対策
