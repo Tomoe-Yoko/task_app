@@ -50,7 +50,7 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role) # 管理者のみ権限変更可能
     end
 
     # パスワード未入力なら更新除外
