@@ -4,4 +4,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :tasks, dependent: :destroy # user.destroy した時に user.tasks も一緒に消える仕様
+  enum :role, { general: 0, admin: 1 }
 end
