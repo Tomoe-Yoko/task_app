@@ -34,13 +34,20 @@ module Admin
         flash[:success] = "ユーザーを更新しました"
       else
         render :edit
+        flash[:alert] = @user.errors.full_messages.join(", ")
       end
     end
 
     def destroy
-      @user.destroy!
-      flash[:notice] = "ユーザーを削除しました。"
-      redirect_to admin_users_path, status: :see_other
+      if @user.destroy
+        redirect_to admin_users_path, status: :see_other
+        flash[:notice] = "ユーザーを削除しました。"
+
+      else
+        redirect_to admin_users_path
+        flash[:alert] = @user.errors.full_messages.join(", ")
+
+      end
     end
 
     private
