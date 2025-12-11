@@ -2,7 +2,7 @@ module Admin
   class LabelsController < BaseController
     before_action :set_label, only: %i[edit update destroy]
     def index
-      @labels = Label.all.order(created_at: :asc)
+      @labels = Label.order(created_at: :asc)
     end
 
     def new

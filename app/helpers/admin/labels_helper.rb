@@ -1,2 +1,4 @@
-module Admin::LabelsHelper
+module Admin
+  module LabelsHelper
+  end
 end
