@@ -1,7 +1,10 @@
 
 <div class="flex justify-between items-center gap-4 my-8">
     <h2 class="text-2xl font-bold mb-6">管理者画面：ユーザー一覧</h2>
+    <div class="flex gap-4">
     <%= link_to  "ユーザー新規作成", new_admin_user_path, class: "btn" %>
+    <%= link_to  "ラベル管理画面", admin_labels_path, class: "btn" %>
+    </div>
 </div>
 <div class="overflow-x-auto">
     <ul class="min-w-full bg-white border border-gray-200 rounded-xl divide-y divide-gray-200">

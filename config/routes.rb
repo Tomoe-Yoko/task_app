@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :users do
       resources :tasks, only: [:index]
     end
+    resources :labels
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
