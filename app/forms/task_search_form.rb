@@ -9,6 +9,7 @@ class TaskSearchForm
   attribute :status, :string
   attribute :priority, :string
   attribute :order, :string
+  attribute :label_ids, default: []
 
   # 検索処理の本体
   def search
@@ -16,6 +17,7 @@ class TaskSearchForm
     tasks = filter_title(tasks)
     tasks = filter_status(tasks)
     tasks = filter_priority(tasks)
+    tasks = filter_labels(tasks)
     sort_order(tasks)
   end
 
@@ -36,6 +38,15 @@ class TaskSearchForm
     priority.present? && Task.priorities.keys.include?(priority) ? tasks.where(priority: priority) : tasks
   end
 
+  # ▼ ラベル検索（複数ラベル対応 OR検索）
+  def filter_labels(tasks)
+    return tasks if label_ids.blank?
+
+    # compact_blank:nil や "" を全部除く
+    ids = label_ids.compact_blank.map(&:to_i)
+    tasks.joins(:labels).where(labels: { id: ids })
+  end
+
   # ▼ ソート
   def sort_order(tasks)
     case order
@@ -46,5 +57,6 @@ class TaskSearchForm
     else
       tasks.updated
     end
+    # ソートは最後に！
   end
 end

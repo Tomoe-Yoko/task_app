@@ -39,8 +39,6 @@
         <%= f.select :priority, Task.priorities.keys.map { |priority| [I18n.t("activerecord.attributes.task/priority.#{priority}"), priority] }, 
         class: "w-[80%] border border-gray-400 p-3 rounded" %>
     </div>
-    <!--ラベル -->
-
     <!-- ラベル -->
     <div class="flex items-start space-x-6 w-full">
         <%= f.label :label_ids, "ラベル", class: "w-[15%]" %>
