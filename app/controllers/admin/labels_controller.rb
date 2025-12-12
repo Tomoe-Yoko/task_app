@@ -3,6 +3,7 @@ module Admin
     before_action :set_label, only: %i[edit update destroy]
     def index
       @labels = Label.order(created_at: :asc)
+      @pagy, @labels = pagy(@labels, limit: 5)
     end
 
     def new
