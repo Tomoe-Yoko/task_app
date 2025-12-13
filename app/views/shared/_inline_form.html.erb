@@ -2,22 +2,35 @@
 <%= form_with model: @task,
               data: { turbo_frame: dom_id(@task) } do |f| %>
 
-<div class="grid grid-cols-7 gap-4 items-center">
+<div class="grid grid-cols-7 gap-2 items-center text-left">
     <%= f.text_field :title, class: "inline_input" %>
-    <%= f.text_field :content, class: "inline_input" %>
+    <%= f.text_area :content, class: "inline_input" %>
     <%= f.date_field :deadline, class: "inline_input " %>
     <%= f.select :status, 
     Task.statuses.keys.map { |status| [I18n.t("activerecord.attributes.task/status.#{status}"), 
     status] }, {}, 
-    class: "display inline_input w-[6rem] mx-auto" %>
-    <%= f.select :priority, Task.priorities.keys.map { |priority| [I18n.t("activerecord.attributes.task/priority.#{priority}"), priority] }, {}, class: "display inline_input w-[6rem] mx-auto" %>
-    <div class="flex justify-center items-center gap-4 col-span-2">
+    class: "display inline_input w-[6rem]" %>
+
+    <%= f.select :priority, Task.priorities.keys.map { |priority| [I18n.t("activerecord.attributes.task/priority.#{priority}"), priority] }, {}, class: "display inline_input w-[4rem]" %>
+
+    <div class="flex flex-wrap gap-1 ">
+        <% Label.order(:name).each do |label| %>
+            <% checked = @task.label_ids.include?(label.id) %>
+            <% checkbox_id = "inline_label_#{label.id}" %>
+            <label for="<%= checkbox_id %>" class="inline-block cursor-pointer px-2 py-1 text-[0.7rem] rounded-full border" title="<%= label.name %>">
+                <%= check_box_tag "task[label_ids][]", label.id, checked, id: checkbox_id %>
+                <%= truncate(label.name, length: 8) %>
+            </label>
+        <% end %>
+    </div>
+
+    <div class="flex justify-center items-center gap-2">
         <p>
             <%= link_to "キャンセル", tasks_path,
-          data: { turbo_frame: dom_id(@task) }, class: "btn02  bg-gray-500 "%>
+          data: { turbo_frame: dom_id(@task) }, class: "btn02  bg-gray-500 text-[0.7rem]"%>
         </p>
         <p>
-            <%= f.submit "更新" , class: "btn02 bg-amber-600 "%>
+            <%= f.submit "更新" , class: "btn02 bg-amber-600 text-sm"%>
         </p>
     </div>
 </div>

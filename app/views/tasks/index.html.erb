@@ -1,17 +1,18 @@
 <div class="flex justify-end items-center gap-4">
 
-    <%= render "shared/search" %>    
-        <%= link_to  "新規作成", new_task_path, class: "btn" %>
-    
+    <%= render "shared/search" %>
+    <%= link_to  "新規作成", new_task_path, class: "btn" %>
+
 </div>
 <%== @pagy.series_nav class: "my-4 color-red-500" %>
 <ul>
-    <li class="grid grid-cols-6 items-center mt-5 p-4 border-b bg-gray-300">
+    <li class="grid grid-cols-7 items-center mt-5 p-4 border-b bg-gray-300">
         <p>タスク名</p>
         <p>タスク内容</p>
         <p>終了期限</p>
         <p>ステータス</p>
         <p>優先度</p>
+        <p>ラベル</p>
         <div class="flex justify-center items-center gap-4">
             <p>詳細</p>
             <p>編集</p>
@@ -19,9 +20,8 @@
     </li>
     <% @tasks.each do |t| %>
     <%= turbo_frame_tag dom_id(t) do %>
-    <li class="grid grid-cols-6 w-full items-center p-4 border-b border-gray-200 hover:bg-gray-100">
-
-        <p class=" w-fit text-lg font-medium">
+    <li class="grid grid-cols-7 w-full items-center p-4 border-b border-gray-200 hover:bg-gray-100">
+        <p class="w-fit text-lg font-medium">
             <%= t.title %>
         </p>
         <p class="w-fit">
@@ -31,11 +31,18 @@
             <%= t.deadline.strftime("%Y年%m月%d日") if t.deadline.present? %>
         </p>
         <p class="w-fit">
-            <%= I18n.t("activerecord.attributes.task/status.#{t.status}") %> 
-            </p>
+            <%= I18n.t("activerecord.attributes.task/status.#{t.status}") %>
+        </p>
         <p class="w-fit">
-            <%= I18n.t("activerecord.attributes.task/priority.#{t.priority}") %> 
-            </p>
+            <%= I18n.t("activerecord.attributes.task/priority.#{t.priority}") %>
+        </p>
+        <div class="flex flex-wrap gap-1">
+          <% t.labels.each do |label| %>
+            <span class="inline-block border border-blue-500 text-blue-500 text-[0.8rem] px-2 py-1 rounded-full">
+              <%= label.name %>
+            </span>
+          <% end %>
+        </div>
         <div class="flex justify-center items-center gap-4">
             <p>
                 <%= link_to  "詳細▶︎", task_path(t),data: { turbo: false }, class: "btn02 bg-blue-500"%>
@@ -48,6 +55,5 @@
     </li>
     <% end %>
     <% end %>
-<%== @pagy.info_tag %>
- </ul>
-
+    <%== @pagy.info_tag %>
+</ul>

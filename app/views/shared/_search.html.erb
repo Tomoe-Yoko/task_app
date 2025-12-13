@@ -1,14 +1,17 @@
 <%= form_with scope: :task_search_form, url: tasks_path, method: :get, local: true do |f| %>
-<div class="flex gap-2">
+<div class="flex gap-2 items-center flex-wrap mr-12">
     <!-- タイトル検索 -->
-    <%= f.text_field :title, 
+    <div class="flex flex-col">
+        <%= f.label :title, "タスク名で検索" %>
+        <%= f.text_field :title, 
     value: @search_form.title,
     placeholder: "タスク名で検索", 
     class: "border border-gray-300 rounded px-2 py-1" %>
+    </div>
     <!-- ステータス検索 -->
-  <div class="flex flex-col">
-    <%=f.label :status, "ステータス" %>
-    <%= f.select :status,
+    <div class="flex flex-col">
+        <%=f.label :status, "ステータス" %>
+        <%= f.select :status,
       [
         ["すべて", ""],
         ["未着手", "not_started"],
@@ -17,12 +20,12 @@
       ],
       { selected: @search_form.status },
       class: "h-10 border border-gray-300 rounded px-2 py-1" %>
-     </div>
-     
+    </div>
+
     <!-- 優先度検索 -->
-     <div class="flex flex-col">
-     <%=f.label :priority, "優先度" %>
-     <%= f.select :priority,
+    <div class="flex flex-col">
+        <%=f.label :priority, "優先度" %>
+        <%= f.select :priority,
       [
         ["すべて", ""],
         ["低", "low"],
@@ -32,10 +35,10 @@
       { selected: @search_form.priority },
       class: "h-10 border border-gray-300 rounded px-2 py-1" %>
     </div>
-    <!-- ソート --> 
+    <!-- ソート -->
     <div class="flex flex-col">
-    <%=f.label :order, "並び順" %>
-    <%= f.select :order,
+        <%=f.label :order, "並び順" %>
+        <%= f.select :order,
       [
         ["更新順",     "updated"],
         ["終了期限順", "latest"],
@@ -44,6 +47,21 @@
       { selected: @search_form.order },
       class: "h-10 border border-gray-300 rounded px-2 py-1" %>
     </div>
-    <%= f.submit "検索", class: "bg-amber-500 btn02 leading-8" %>
+
+    <!-- ラベル検索 -->
+    <div class="flex flex-col">
+        <%= f.label :label_ids, 'ラベル' %>
+        <%= f.select :label_ids,
+      options_for_select(Label.order(:created_at).pluck(:name, :id), selected: @search_form.label_ids),
+      {},
+      multiple: true,
+      class: 'min-w-[8rem] border border-gray-300 rounded px-2 py-1 text-xs bg-white'
+    %>
+        <span class="text-[0.7rem] text-gray-500 ml-2">（Ctrl/Cmd+クリックで複数選択/解除）</span>
+    </div>
+
+    <div>
+        <%= f.submit "検索", class: "bg-amber-500 btn02 leading-8" %>
+    </div>
 </div>
 <% end %>

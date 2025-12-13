@@ -39,6 +39,31 @@
         <%= f.select :priority, Task.priorities.keys.map { |priority| [I18n.t("activerecord.attributes.task/priority.#{priority}"), priority] }, 
         class: "w-[80%] border border-gray-400 p-3 rounded" %>
     </div>
+    <!-- ラベル -->
+    <div class="flex items-start space-x-6 w-full">
+        <%= f.label :label_ids, "ラベル", class: "w-[15%]" %>
+        <div class="mb-3 border border-gray-300 rounded p-3 max-h-48 overflow-y-scroll">
+            <% Label.order(:name).each do |label| %>
+            <% checked = @task.label_ids.include?(label.id) %>
+            <!-- それぞれのチェックボックスにid付与 label_1...-->
+            <% checkbox_id = "label_#{label.id}" %>
+            <label for="<%= checkbox_id %>" class="inline-block cursor-pointer m-1">
+                <%= check_box_tag "task[label_ids][]",
+                label.id,
+                checked,
+                id: checkbox_id,
+                class: "peer hidden" %>
+                <!-- 表示部分 -->
+                <!--兄弟の .peer クラスを持った要素が:checked状態になったときUI変更-->
+                <span class="block px-3 py-2 text-sm rounded-full border transition-colors border-blue-600 bg-white text-blue-600 opacity-60 peer-checked:bg-blue-500 peer-checked:text-white peer-checked:border-blue-500 peer-checked:opacity-100">
+                    <%= label.name %>
+                </span>
+            </label>
+            <% end %>
+        </div>
+    </div>
+
+
     <!-- 保存ボタン -->
     <div class="text-center">
         <%= f.submit(@task.persisted? ? "更新" : "作成",class: "btn") %>
