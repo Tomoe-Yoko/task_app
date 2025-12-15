@@ -39,18 +39,31 @@
                 </dd>
             </dl>
         </div>
-    </div>
 
-    <!-- ボタンエリア -->
-    <div class="flex justify-center gap-10 mt-16">
-        <%= link_to "編集",
+        <div>
+            <dl>
+                <dt>ラベル</dt>
+                <dd>
+                   <% @task.labels.each do |label| %>
+                    <span class="inline-block border border-blue-500 text-blue-500 text-sm px-2 py-1 rounded-full mr-2">
+                      <%= label.name %>
+                    </span>
+                   <% end %>
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<!-- ボタンエリア -->
+<div class="flex justify-center gap-10 mt-16">
+    <%= link_to "編集",
         edit_task_path(@task),
         class: "px-10 py-3 bg-sky-500 text-white rounded-xl text-lg shadow hover:bg-sky-600 transition" %>
 
-        <%= link_to "削除",
+    <%= link_to "削除",
         task_path(@task),
         method: :delete,
         data: {"turbo-method": :delete,turbo_confirm:"本当に削除しますか？" },
         class: "px-10 py-3 bg-red-600 text-white rounded-xl text-lg shadow hover:bg-red-700 transition" %>
-    </div>
+</div>
 </div>

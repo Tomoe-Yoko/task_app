@@ -1,5 +1,5 @@
 module Admin
-  class UsersController < ApplicationController
+  class UsersController < BaseController
     before_action :set_user, only: %i[edit update destroy]
     def index
       @users = User.includes(:tasks) # N+1問題対策
@@ -34,13 +34,20 @@ module Admin
         flash[:success] = "ユーザーを更新しました"
       else
         render :edit
+        flash[:alert] = @user.errors.full_messages.join(", ")
       end
     end
 
     def destroy
-      @user.destroy!
-      flash[:notice] = "ユーザーを削除しました。"
-      redirect_to admin_users_path, status: :see_other
+      if @user.destroy
+        redirect_to admin_users_path, status: :see_other
+        flash[:notice] = "ユーザーを削除しました。"
+
+      else
+        redirect_to admin_users_path
+        flash[:alert] = @user.errors.full_messages.join(", ")
+
+      end
     end
 
     private
@@ -50,7 +57,7 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :role) # 管理者のみ権限変更可能
     end
 
     # パスワード未入力なら更新除外
