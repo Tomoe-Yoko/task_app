@@ -45,5 +45,7 @@ module TaskApp
     config.i18n.available_locales = [:en, :ja]
     # ロケール辞書の読み込みパス拡張（必要なら）
     config.i18n.load_path += Rails.root.glob("config/locales/**/*.{*,yml}")
+    # エラー　カスタムエラーページを有効にする
+    config.exceptions_app = Rails.application.routes
   end
 end
