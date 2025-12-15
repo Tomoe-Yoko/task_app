@@ -1,5 +1,3 @@
-require_dependency Rails.root.join('app/errors/forbidden_error') # 強制読み込み
-
 module Admin
   class BaseController < ApplicationController
     before_action :require_admin
